@@ -10,9 +10,11 @@ def new_user(name,username,password,email):
 def check_user(username,password):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT username, password FROM users WHERE username=? AND password=?", (username, password))
+    cursor.execute("SELECT username, password FROM users WHERE username=?", (username))
     result=cursor.fetchall()
     if result==[]:
         return False
     else:
         return True
+#Need to do the changes in the check_user function
+
