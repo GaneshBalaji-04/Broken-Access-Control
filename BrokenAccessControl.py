@@ -18,7 +18,7 @@ def submit():
     name=request.form['name']
     username=request.form['username']
     salt=bcrypt.gensalt()
-    password=bcrypt.hashpw(request.form['password'].encode(),salt)
+    password=request.form['password']
     email=request.form['email']
     database.new_user(name,username,password,email)
     return render_template('regsuccess.html')
@@ -30,7 +30,7 @@ def login():
 @app.route('/performlogin',methods=['POST','GET'])
 def login_performed():
     username=request.form['username']
-    password=bcrypt.hashpw(request.form['password'].encode(),salt)
+    password=request.form['password']
     if database.check_user(username,password):
         return """
         <meta http-equiv="refresh" content="5; url=/user">
